@@ -1,10 +1,11 @@
-package com.shangyi.supplier;
+package com.shangyi.supplier.auth;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.shangyi.supplier.util.Util;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
 

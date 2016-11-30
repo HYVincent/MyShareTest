@@ -1,4 +1,4 @@
-package com.shangyi.supplier;
+package com.shangyi.supplier.config;
 
 import android.app.Application;
 import android.content.Context;

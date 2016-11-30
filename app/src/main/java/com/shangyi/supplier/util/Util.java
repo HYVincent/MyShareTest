@@ -1,4 +1,4 @@
-package com.shangyi.supplier;
+package com.shangyi.supplier.util;
 
 import android.app.Activity;
 import android.app.AlertDialog;

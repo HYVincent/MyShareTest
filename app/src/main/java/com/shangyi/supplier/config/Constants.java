@@ -1,4 +1,4 @@
-package com.shangyi.supplier;
+package com.shangyi.supplier.config;
 
 /**
  * 项目名称：MyTest
@@ -14,6 +14,8 @@ public class Constants {
     public static final String QQ_APP_ID="1105839038";
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */
     public static final String SINA_APP_KEY  = "1470495590";
+    public static final String ALIPAY_APP_KEY = "2016082401799279";//支付宝的app审核没通过，so，无法分享
+
 
     public static final String APP_SHARED_CONTENT ="内容";
     public static final String APP_SHARED_ADDRESS="http://ggschoolapi.sayimo.cn/schoolwap/view/find/positionDemand/downapp.html";//这个是app分享地址，不可随意改动

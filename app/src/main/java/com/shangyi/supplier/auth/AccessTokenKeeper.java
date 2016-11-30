@@ -1,4 +1,4 @@
-package com.shangyi.supplier;
+package com.shangyi.supplier.auth;
 
 import android.content.Context;
 import android.content.SharedPreferences;

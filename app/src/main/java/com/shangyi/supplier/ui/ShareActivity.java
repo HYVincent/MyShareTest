@@ -1,4 +1,4 @@
-package com.shangyi.supplier;
+package com.shangyi.supplier.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +11,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alipay.share.sdk.openapi.APAPIFactory;
+import com.alipay.share.sdk.openapi.APMediaMessage;
+import com.alipay.share.sdk.openapi.APTextObject;
+import com.alipay.share.sdk.openapi.IAPApi;
+import com.alipay.share.sdk.openapi.SendMessageToZFB;
+import com.shangyi.supplier.auth.BaseUIListener;
+import com.shangyi.supplier.R;
+import com.shangyi.supplier.config.Constants;
+import com.shangyi.supplier.config.MyApplication;
+import com.shangyi.supplier.util.ToastUtil;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.WeiboMessage;
 import com.sina.weibo.sdk.api.share.BaseResponse;
@@ -53,11 +63,13 @@ public class ShareActivity extends AppCompatActivity implements IWeiboHandler.Re
     RelativeLayout rlWXCollect;//微信收藏
     @BindView(R.id.rl_share_sina)
     RelativeLayout rlShareSina;
+    @BindView(R.id.rl_share_ali_pay)
+    RelativeLayout rlShareAliPay;
 
     private IWXAPI api;
     private Bitmap thumb;
     private Tencent mTencent;
-
+    private IAPApi apiAliPay;
     /**sina微博*/
     private IWeiboShareAPI mWeiboShareAPI=null;
     @Override
@@ -92,6 +104,9 @@ public class ShareActivity extends AppCompatActivity implements IWeiboHandler.Re
         if (savedInstanceState != null) {
             mWeiboShareAPI.handleWeiboResponse(getIntent(), this);
         }
+        /**分享到支付宝 由于我的app审核未通过，所以无法分享*/
+        //创建工具对象实例，此处的APPID为上文提到的，申请应用生效后，在应用详情页中可以查到的支付宝应用唯一标识
+        apiAliPay = APAPIFactory.createZFBApi(getApplicationContext(),Constants.ALIPAY_APP_KEY,false);
     }
     @Override
     protected void onNewIntent(Intent intent) {
@@ -108,7 +123,7 @@ public class ShareActivity extends AppCompatActivity implements IWeiboHandler.Re
 
     }
 
-    @OnClick({R.id.rl_share_qq_friends, R.id.rl_share_qq_qzone, R.id.rl_share_weixin_friend, R.id.rl_share_sina,
+    @OnClick({R.id.rl_share_qq_friends, R.id.rl_share_qq_qzone, R.id.rl_share_weixin_friend, R.id.rl_share_sina,R.id.rl_share_ali_pay,
             R.id.rl_share_weixin_collect, R.id.tv_cancel_share, R.id.rl_share_weixin_circle_of_friends, R.id.tv_other})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -128,8 +143,11 @@ public class ShareActivity extends AppCompatActivity implements IWeiboHandler.Re
                 sendToWeiXin(getString(R.string.app_name), Constants.APP_SHARED_ADDRESS, Constants.APP_SHARED_CONTENT, thumb, 2);
                 break;
             case R.id.rl_share_sina://分享到新浪微博
-                ToastUtil.defaultToast(MyApplication.getInstance(),"Click");
+//                ToastUtil.defaultToast(MyApplication.getInstance(),"Click");
                 sendToSina(getString(R.string.app_name),Constants.APP_SHARED_ADDRESS,Constants.APP_SHARED_CONTENT,"defaultText");
+                break;
+            case R.id.rl_share_ali_pay:
+                sendToAliPay(Constants.APP_SHARED_CONTENT+Constants.APP_SHARED_ADDRESS);
                 break;
             case R.id.tv_cancel_share:
                 finish();
@@ -141,6 +159,21 @@ public class ShareActivity extends AppCompatActivity implements IWeiboHandler.Re
                 break;
         }
     }
+
+    private void sendToAliPay(String content) {
+        //组装文本消息内容对象
+        APTextObject textObject = new APTextObject();
+        textObject.text = content;
+        //组装分享消息对象
+        APMediaMessage mediaMessage = new APMediaMessage();
+        mediaMessage.mediaObject = textObject;
+        //将分享消息对象包装成请求对象
+        SendMessageToZFB.Req req = new SendMessageToZFB.Req();
+        req.message = mediaMessage;
+        //发送请求
+        apiAliPay.sendReq(req);
+    }
+
     /**
      * 分享到微博
      * @param title 网页title
