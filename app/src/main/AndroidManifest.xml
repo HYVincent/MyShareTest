@@ -55,7 +55,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent1105839038" />
+                <data android:scheme="tencent1105839038" /> <!--改为在QQ后台申请的app id-->
             </intent-filter>
         </activity>
 
