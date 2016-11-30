@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">尚一人才服务</string>
+    <!-- Common Toast about Network-->
+    <string name="common_network_is_null">网络连接失败</string>
+    <string name="common_network_data_error">数据加载失败，请稍后再试</string>
+
+    <string name="main_updateDlg_newversion">检测到新版本</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_download_continue">继续下载</string>
+    <string name="common_download_nowifi">当前网络是2G/3G/4G网络，不是Wifi网络，要继续下载么？</string>
+    <string name="common_download">下载</string>
+    <string name="main_updateDlg_update">更新</string>
+    <string name="dialog_update_is_downloading">正在下载...</string>
+    <string name="background_download">后台下载中..</string>
+    <string name="et_text_download_des">快键后台下载提醒</string>
+    <string name="et_text_update_des">当前已经是最新版本</string>
+    <!--二维码扫描相关-->
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
+    <string name="viewfinderview_status_text2">即可自动扫描</string>
+    <string name="button_ok">OK</string>
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+
+    <string name="exit_hint">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;你的账户在其他设备登录，如要继续，请重新登录，如非本人操作，请及时修改密码</string>
+
+</resources>
