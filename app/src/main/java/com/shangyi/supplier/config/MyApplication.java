@@ -5,6 +5,14 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.shangyi.supplier.log.MyLog;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.log.LoggerInterceptor;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+
 /**
  * 项目名称：MyTest
  * 类描述：
@@ -21,6 +29,18 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         myApplication=this;
+        MyLog.init("MyTest");
+        MyLog.setSwitch(true);//开启log
+        /**OkHttpUtils init*/
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new LoggerInterceptor("MyTest"))
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                //其他配置
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
+
+
     }
 
     public static synchronized MyApplication getInstance() {
