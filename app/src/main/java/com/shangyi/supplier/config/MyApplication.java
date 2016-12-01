@@ -5,7 +5,9 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.shangyi.supplier.R;
 import com.shangyi.supplier.log.MyLog;
+import com.weavey.loading.lib.LoadingLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
@@ -40,6 +42,20 @@ public class MyApplication extends Application {
                 .build();
         OkHttpUtils.initClient(okHttpClient);
 
+        /**  加载动画 http://gold.xitu.io/post/583c242061ff4b006b59c7fb*/
+        LoadingLayout.getConfig()
+                .setErrorText("出错啦~请稍后重试！")
+                .setEmptyText("抱歉，暂无数据")
+                .setNoNetworkText("无网络连接，请检查您的网络···")
+                .setErrorImage(R.mipmap.define_error)
+                .setEmptyImage(R.mipmap.define_empty)
+                .setNoNetworkImage(R.mipmap.define_nonetwork)
+                .setAllTipTextColor(R.color.gray)
+                .setAllTipTextSize(14)
+                .setReloadButtonText("点我重试哦")
+                .setReloadButtonTextSize(14)
+                .setReloadButtonTextColor(R.color.gray)
+                .setReloadButtonWidthAndHeight(150,40);
 
     }
 

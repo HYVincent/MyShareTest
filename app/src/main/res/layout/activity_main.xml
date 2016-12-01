@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.weavey.loading.lib.LoadingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shangyi.supplier.ui.MainActivity">
+    app:isFirstVisible="true">
 
-    <TextView
-        android:text="Share Text"
-        android:padding="@dimen/size_15"
-        android:id="@+id/tv_sina_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:padding="@dimen/size_15"
-        android:id="@+id/tv_login"
-        android:text="Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_sina_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_15"
+            android:text="Share Text" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/size_15"
+            android:text="Login" />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</com.weavey.loading.lib.LoadingLayout>

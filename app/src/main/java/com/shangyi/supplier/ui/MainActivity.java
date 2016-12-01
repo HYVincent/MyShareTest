@@ -31,10 +31,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
-
-
-
         final String loginUrl="https://ggschool.sayimo.cn/clientapi/"+"provider/providerlogin?providerAccout="+"18696855784"+"&providerPassWord="+"222222"+"&deviceToken="+"AjD0BlcUEQMMJeN32G24VFRwmnRn3guinoN1XeBMgVdR"+"&deviceType=1";
         findViewById(R.id.tv_login).setOnClickListener(new View.OnClickListener() {
             @Override

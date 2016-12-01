@@ -47,4 +47,5 @@ dependencies {
     //android开发之Logger神器 http://blog.csdn.net/yy1300326388/article/details/45825343 颜色配置：http://blog.csdn.net/yy1300326388/article/details/45825123
     compile 'com.orhanobut:logger:1.8'
     compile 'com.navercorp.volleyextensions:volley-views:2.0.1'
+    compile 'com.lai.weavey:loadinglayout:1.2'//加载动画
 }
