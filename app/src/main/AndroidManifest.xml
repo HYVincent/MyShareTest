@@ -68,6 +68,8 @@
             android:name="com.sina.weibo.sdk.net.DownloadService"
             android:exported="false"></service>-->
 
+        <activity android:name=".ui.SecondActivity"/>
+
     </application>
 
 </manifest>

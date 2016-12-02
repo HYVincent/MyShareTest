@@ -17,6 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.shangyi.supplier.R;
 import com.shangyi.supplier.config.MyApplication;
@@ -29,6 +32,8 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
     private String versionName="qq.apk";
     private String versionUri="http://gdown.baidu.com/data/wisegame/62474124707e78ad/QQ_432.apk";
     private String downloadPath;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,ShareActivity.class));
+                overridePendingTransition(R.anim.push_up_in,R.anim.push_up_out);
             }
         });
 
@@ -76,9 +83,103 @@ public class MainActivity extends AppCompatActivity{
         findViewById(R.id.tv_down_file_apk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivityPermissionsDispatcher.downApkFileWithCheck(MainActivity.this,versionUri,versionName);
+                MainActivityPermissionsDispatcher.downApkFileWithCheck(MainActivity.this,versionUri,versionName);//http://blog.csdn.net/abbott_133/article/details/51754993
             }
         });
+        findViewById(R.id.tv_intent_anim).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*startActivity(new Intent(MainActivity.this,SecondActivity.class));
+                overridePendingTransition(R.anim.push_up_in,R.anim.push_up_out);*/
+                //TODO 未做
+                ToastUtil.defaultToast(MyApplication.getInstance(),"留着后面用");
+            }
+        });
+        listView=(ListView)findViewById(R.id.listView1);
+        String[] ls = getResources().getStringArray(R.array.anim_type);
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < ls.length; i++) {
+            list.add(ls[i]);
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+                switch (position) {
+                    case 0:
+                        overridePendingTransition(R.anim.fade, R.anim.hold);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),"0");
+                        break;
+                    case 1:
+                        overridePendingTransition(R.anim.my_scale_action,
+                                R.anim.my_alpha_action);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),"1");
+                        break;
+                    case 2:
+                        overridePendingTransition(R.anim.scale_rotate,
+                                R.anim.my_alpha_action);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),"2");
+                        break;
+                    case 3:
+                        overridePendingTransition(R.anim.scale_translate_rotate,
+                                R.anim.my_alpha_action);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),"3");
+                        break;
+                    case 4:
+                        overridePendingTransition(R.anim.scale_translate,
+                                R.anim.my_alpha_action);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),"4");
+                        break;
+                    case 5:
+                        overridePendingTransition(R.anim.hyperspace_in,
+                                R.anim.hyperspace_out);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),"5");
+                        break;
+                    case 6:
+                        overridePendingTransition(R.anim.push_left_in,
+                                R.anim.push_left_out);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),String.valueOf(position));
+                        break;
+
+                    case 7:
+                        overridePendingTransition(R.anim.push_up_in,
+                                R.anim.push_up_out);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),String.valueOf(position));
+                        break;
+                    case 8:
+                        overridePendingTransition(R.anim.slide_left,
+                                R.anim.slide_right);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),String.valueOf(position));
+                        break;
+                    case 9:
+                        overridePendingTransition(R.anim.wave_scale,
+                                R.anim.my_alpha_action);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),String.valueOf(position));
+                        break;
+                    case 10:
+                        overridePendingTransition(R.anim.zoom_enter,
+                                R.anim.zoom_exit);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),String.valueOf(position));
+                        break;
+                    case 11:
+                        overridePendingTransition(R.anim.slide_up_in,
+                                R.anim.slide_down_out);
+                        ToastUtil.defaultToast(MyApplication.getInstance(),String.valueOf(position));
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+
+
     }
 
     /**
