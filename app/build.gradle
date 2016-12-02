@@ -48,4 +48,6 @@ dependencies {
     compile 'com.orhanobut:logger:1.8'
     compile 'com.navercorp.volleyextensions:volley-views:2.0.1'
     compile 'com.lai.weavey:loadinglayout:1.2'//加载动画
+    compile 'com.github.hotchemi:permissionsdispatcher:2.1.3'//适配android6.0的权限兼容
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
 }
