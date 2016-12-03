@@ -13,6 +13,7 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
+import io.realm.Realm;
 import okhttp3.OkHttpClient;
 
 /**
@@ -34,6 +35,17 @@ public class MyApplication extends Application {
         MyLog.init("MyTest");
         MyLog.setSwitch(true);//开启log
         /**OkHttpUtils init*/
+        okHttpUtilsInit();
+        /**  加载动画 http://gold.xitu.io/post/583c242061ff4b006b59c7fb*/
+        loadAnim();
+        initRealm();//初始化Realm数据库 http://www.jianshu.com/p/da9babd32d18
+    }
+
+    private void initRealm() {
+        Realm.init(this);
+    }
+
+    private void okHttpUtilsInit() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new LoggerInterceptor("MyTest"))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
@@ -41,8 +53,9 @@ public class MyApplication extends Application {
                 //其他配置
                 .build();
         OkHttpUtils.initClient(okHttpClient);
+    }
 
-        /**  加载动画 http://gold.xitu.io/post/583c242061ff4b006b59c7fb*/
+    private void loadAnim() {
         LoadingLayout.getConfig()
                 .setErrorText("出错啦~请稍后重试！")
                 .setEmptyText("抱歉，暂无数据")
@@ -56,7 +69,6 @@ public class MyApplication extends Application {
                 .setReloadButtonTextSize(14)
                 .setReloadButtonTextColor(R.color.gray)
                 .setReloadButtonWidthAndHeight(150,40);
-
     }
 
     public static synchronized MyApplication getInstance() {
@@ -67,19 +79,13 @@ public class MyApplication extends Application {
         DisplayMetrics metric = new DisplayMetrics();
         WindowManager mWindowManager = (WindowManager) getInstance().getSystemService(Context.WINDOW_SERVICE);
         mWindowManager.getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels; // 屏幕宽度（像素）
-        int height = metric.heightPixels; // 屏幕宽度（像素）
-        int w = width + height;
-        return width;
+        return metric.widthPixels; // 屏幕宽度（像素）
     }
 
     public static int getScreenParameterHeight() {
         DisplayMetrics metric = new DisplayMetrics();
         WindowManager mWindowManager = (WindowManager) getInstance().getSystemService(Context.WINDOW_SERVICE);
         mWindowManager.getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels; // 屏幕宽度（像素）
-        int height = metric.heightPixels; // 屏幕宽度（像素）
-        int w = width + height;
-        return height;
+        return metric.heightPixels; // 屏幕宽度（像素）
     }
 }
